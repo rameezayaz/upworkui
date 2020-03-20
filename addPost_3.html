@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Post Your Add</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.2/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyCaThgHW3sKsgYvkF0ds_jn-O3XYyC-fIU",
+        authDomain: "olx-expertizo-c7ddf.firebaseapp.com",
+        databaseURL: "https://olx-expertizo-c7ddf.firebaseio.com",
+        projectId: "olx-expertizo-c7ddf",
+        storageBucket: "olx-expertizo-c7ddf.appspot.com",
+        messagingSenderId: "105055913564",
+        appId: "1:105055913564:web:42d56426c4f08b08800899",
+        measurementId: "G-53P9ZB1VG9"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+    <!-- <script src="signUp.js"></script> -->
+
+    <style>
+      * {
+        font-family: "Montserrat", "Roboto", "Helvetica", sans-serif;
+      }
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #main-container {
+        /* display: flex; */
+        width: 60%;
+        border: 2px solid olive;
+        margin: 10em auto;
+        text-align: center;
+        padding: 2em 2em 3em 2em;
+        background-color: whitesmoke;
+      }
+      h1 {
+        display: inline-block;
+        font-size: 3rem;
+        margin-top: 0.2em;
+      }
+      #content-container {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+      }
+
+      img {
+        max-width: 180px;
+        display: block;
+      }
+      input[type="file"] {
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+        /* border: 1px solid #2d2d2d; */
+      }
+
+      #ad-categories,
+      #state {
+        width: 23.5em;
+        height: 3em;
+        /* padding: 10px; */
+      }
+      .inp {
+        /* width: 30em;
+        height: 2.5em; */
+        width: 410px;
+        height: 40px;
+      }
+      textarea {
+        width: 50%;
+      }
+
+      .title,
+      select,
+      option,
+      textarea,
+      .inp {
+        font-size: 1.1em;
+      }
+      .title {
+        margin-bottom: 0.9em;
+        margin-top: 2em;
+        font-weight: bold;
+      }
+      #categories,
+      #details,
+      #imageDiv,
+      #location,
+      .callToActionBtn {
+        margin-bottom: 3em;
+      }
+      .postBtn {
+        width: 12em;
+        height: 2.5em;
+        font-weight: bold;
+        font-size: 1.2em;
+        color: white;
+        border: none;
+        background-color: rgb(0, 78, 245);
+      }
+      /* .postBtnDiv {
+        display: block;
+      } */
+      .callToActionBtn {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        margin-top: 2em;
+      }
+      #btn2 {
+        color: rgb(0, 78, 245);
+        background-color: white;
+        border: 2px solid rgb(0, 78, 245);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main-container">
+      <h1>Post Your Ad</h1>
+      <div id="content-container">
+        <div id="categories">
+          <h2>Choose A Category</h2>
+          <select name="ad-categories" id="ad-categories">
+            <option selected="true" disabled="disabled"
+              >Select A Category</option
+            >
+            <option value="mobiles">Mobiles</option>
+            <option value="cars">Cars</option>
+            <option value="bikes">Bikes</option>
+            <option value="property-rent">Property For Rent</option>
+            <option value="property-sale">Property For Sent</option>
+            <option value="electronics-home-appliances"
+              >Electronics & Home Appliances</option
+            >
+            <option value="animals">Animals</option>
+            <option value="books-sports-hobbies"
+              >Books, Sports & Hobbies</option
+            >
+            <option value="fashion-beauty">Fashion & Beauty</option>
+            <option value="furniture-home-decor">Furniture & Home Decor</option>
+          </select>
+        </div>
+
+        <div id="details">
+          <h2>Include Some Details</h2>
+          <div id="titleDiv">
+            <div class="title">Title:</div>
+            <input
+              class="inp"
+              type="text"
+              name="title-input"
+              id="title-input"
+            />
+          </div>
+          <div id="descriptionDiv">
+            <div class="title">Description:</div>
+            <textarea
+              name="description-input"
+              id="description-input"
+              cols="30"
+              rows="10"
+            ></textarea>
+          </div>
+          <div id="priceDiv">
+            <div class="title">Price:</div>
+            <input
+              class="inp"
+              type="text"
+              name="price-input"
+              id="price-input"
+            />
+          </div>
+        </div>
+
+        <div id="imageDiv">
+          <h2>Upload Photos</h2>
+          <div id="select-image">
+            <input
+              type="file"
+              class="inp"
+              id="image"
+              accept="image/*"
+            /><br /><br />
+            <input type="button" value="Upload Image" onclick="upload()" />
+
+            <!-- <img id="blah" src="http://placehold.it/180" alt="your image" /> -->
+          </div>
+        </div>
+
+        <div id="location">
+          <h2>Confirm Your location</h2>
+          <select name="state" id="state">
+            <option value="sindh">Sindh</option>
+            <option value="punjab">Punjab</option>
+            <option value="islamabad">Islamabad</option>
+            <option value="balochistan">Balochistan</option>
+            <option value="kpk">Khyber Pakhtunkhwa</option>
+          </select>
+        </div>
+
+        <div class="callToActionBtn">
+          <div class="postBtnDiv">
+            <button class="postBtn" onclick="addPost()">Post Ad</button>
+          </div>
+          <div class="postBtnDiv">
+            <button
+              class="postBtn"
+              id="btn2"
+              onclick="window.location.href='../../index.html'"
+            >
+              Homepage
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../jsFiles/getPosts.js"></script>
+    <script src="../jsFiles/addPost.js"></script>
+
+    <!-- FOR Image Upload -->
+    <!-- <script>
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function(e) {
+            $("#blah").attr("src", e.target.result);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    </script> -->
+  </body>
+</html>
